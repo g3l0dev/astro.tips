@@ -1,0 +1,27 @@
+---
+import { Card, Header } from "@components/";
+import Base from "@layouts/Base.astro";
+
+const allPosts = await Astro.glob("../content/liderazgo-en-crecimiento/*.md");
+---
+
+<Base title="Astro Blog">
+	<section class="container mx-auto p-4" aria-label="header">
+		<Header title="Astro Blog" />
+	</section>
+	<section class="container mx-auto p-4">
+		<h2>contenido principal</h2>
+		<div class="grid grid-cols-3 gap-4">
+      {
+        allPosts.map((post) => (
+          <Card
+            title={post?.frontmatter?.title}
+            time={post?.frontmatter?.pubDate}
+            tags={post?.frontmatter?.tags}
+            
+          />
+        ))
+      }
+    </div>
+	</section>
+</Base>
